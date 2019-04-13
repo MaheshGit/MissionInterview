@@ -2,8 +2,7 @@ package Tree;
 
 import java.util.Stack;
 
-public class PreOrderTraversal {
-
+public class InOrderTraversal {
 	public static void main(String[] args) {
 
 		/*
@@ -13,8 +12,10 @@ public class PreOrderTraversal {
 		 *     /\ 
 		 *    4  5
 		 * 
-		 * Pre Order Traversal : 1 2 4 5 3 Post Order Traversal : 4 5 2 3 1 In Order
-		 * Traversal : 4 2 5 1 3 Level Order Traversal : 1 2 3 4 5
+		 * Pre Order Traversal : 1 2 4 5 3 
+		 * Post Order Traversal : 4 5 2 3 1 
+		 * In Order Traversal : 4 2 5 1 3 
+		 * Level Order Traversal : 1 2 3 4 5
 		 * 
 		 */
 		TreeNode root = new TreeNode(1);
@@ -26,22 +27,22 @@ public class PreOrderTraversal {
 		root.setRight(right1);
 		left1.setLeft(left1_left);
 		left1.setRight(left1_right);
-		preOrderRecursively(root);
+		inOrderRecursively(root);
 		System.out.println();
-		preOrderIterativeTraversal(root);
+		inOrderIterativeTraversal(root);
 	}
 
-	public static void preOrderRecursively(TreeNode root) {
+	public static void inOrderRecursively(TreeNode root) {
 		if (root == null)
 			return;
-		System.out.print(root.getData() + ", ");
 		if (root.getLeft() != null)
-			preOrderRecursively(root.getLeft());
+			inOrderRecursively(root.getLeft());
+		System.out.print(root.getData() + ", ");
 		if (root.getRight() != null)
-			preOrderRecursively(root.getRight());
+			inOrderRecursively(root.getRight());
 	}
 
-	public static void preOrderIterativeTraversal(TreeNode root) {
+	public static void inOrderIterativeTraversal(TreeNode root) {
 
 		if (root == null)
 			return;
@@ -49,15 +50,16 @@ public class PreOrderTraversal {
 			Stack<TreeNode> s = new Stack<TreeNode>();
 			while (root != null || !s.isEmpty()) {
 				if (root != null) {
-					System.out.print(root.getData() + ", ");
 					s.push(root);
 					root = root.getLeft();
 				} else {
 					root = s.pop();
+					System.out.print(root.getData() + ", ");
 					root = root.getRight();
 				}
 			}
 		}
 	}
+
 
 }
