@@ -30,6 +30,8 @@ public class PostOrderTraversal {
 		postOrderRecursively(root);
 		System.out.println();
 		postOrderIterativeTraversalUsingTwoStacks(root);
+		System.out.println();
+		postOrderIterativeTraversalUsingOneStack(root);
 	}
 
 	public static void postOrderRecursively(TreeNode root) {
@@ -78,18 +80,22 @@ public class PostOrderTraversal {
 	 * @param root
 	 */
 	public static void postOrderIterativeTraversalUsingOneStack(TreeNode root) {
-
-		if (root == null)
-			return;
-		else {
-			Stack<TreeNode> s = new Stack<TreeNode>();
-			while (root != null || !s.isEmpty()) {
-				if (root != null) {
-					s.push(root);
-					root = root.getRight();
-				} else {
-					root = s.pop();
-					root = root.getLeft();
+		TreeNode currentNode = root;
+		Stack<TreeNode> s = new Stack<TreeNode>();
+		while (true) {
+			if (currentNode != null) {
+				s.push(currentNode);
+				currentNode = currentNode.getLeft();
+			} else {
+				if (s.isEmpty())
+					return;
+				currentNode = s.peek().getRight();
+				if (currentNode == null) {
+					TreeNode lastNode = null;
+					while (!s.isEmpty() && s.peek().getRight() == lastNode) {
+						lastNode = s.pop();
+						System.out.print(lastNode.getData() + ", ");
+					}
 				}
 			}
 		}
