@@ -82,20 +82,21 @@ public class PostOrderTraversal {
 	public static void postOrderIterativeTraversalUsingOneStack(TreeNode root) {
 		TreeNode currentNode = root;
 		Stack<TreeNode> s = new Stack<TreeNode>();
-		while (true) {
+		while (currentNode != null || !s.isEmpty()) {
 			if (currentNode != null) {
 				s.push(currentNode);
 				currentNode = currentNode.getLeft();
 			} else {
-				if (s.isEmpty())
-					return;
-				currentNode = s.peek().getRight();
-				if (currentNode == null) {
-					TreeNode lastNode = null;
-					while (!s.isEmpty() && s.peek().getRight() == lastNode) {
-						lastNode = s.pop();
-						System.out.print(lastNode.getData() + ", ");
+				TreeNode temp = s.peek().getRight();
+				if (temp == null) {
+					temp = s.pop();
+					System.out.print(temp.getData() + ", ");
+					while (!s.isEmpty() && s.peek().getRight() == temp) {
+						temp = s.pop();
+						System.out.print(temp.getData() + ", ");
 					}
+				} else {
+					currentNode = temp;
 				}
 			}
 		}
