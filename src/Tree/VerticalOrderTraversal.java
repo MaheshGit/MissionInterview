@@ -50,36 +50,39 @@ public class VerticalOrderTraversal {
 				TreeNode temp = q1.poll();
 				int order = q2.poll();
 				LinkedList<TreeNode> list = null;
-				
-				if(map.containsKey(order)) {
+
+				if (map.containsKey(order)) {
 					list = map.get(order);
-				}else {
+				} else {
 					list = new LinkedList<TreeNode>();
 				}
 				list.add(temp);
 				map.put(order, list);
-				
-				if(temp.getLeft() != null) {
+
+				if (temp.getLeft() != null) {
 					q1.offer(temp.getLeft());
 					q2.offer(order - 1);
 				}
-				
-				if(temp.getRight() != null) {
+
+				if (temp.getRight() != null) {
 					q1.offer(temp.getRight());
 					q2.offer(order + 1);
 				}
 			}
-			
+
 			Set<Entry<Integer, LinkedList<TreeNode>>> entries = map.entrySet();
 			for (Map.Entry<Integer, LinkedList<TreeNode>> entry : entries) {
-                 System.out.print("Order " + entry.getKey() + " :::");
-                 LinkedList<TreeNode> list = entry.getValue();
-                 for(TreeNode node : list) {
-                	 System.out.print(node.getData() + " ");
-                 }
-                 System.out.println();
+				System.out.print("Order " + entry.getKey() + " :::");
+				LinkedList<TreeNode> list = entry.getValue();
+				for (TreeNode node : list) {
+					System.out.print(node.getData() + " ");
+				}
+				System.out.println();
 			}
-		}	
+
+			// Time COmplexity : O(nlog(n))
+			// Space Complexity : O(n)
+		}
 	}
 
 }
