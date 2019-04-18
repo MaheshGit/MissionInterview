@@ -40,11 +40,15 @@ public class LevelOrderTraversal {
 			Queue<TreeNode> q = new LinkedList<TreeNode>();
 			q.offer(root);
 			while (!q.isEmpty()) {
-				if (q.peek().getLeft() != null)
-					q.offer(q.peek().getLeft());
-				if (q.peek().getRight() != null)
-					q.offer(q.peek().getRight());
-				System.out.print(q.poll().getData() + ", ");
+				int level = q.size();
+				for (int i = 0; i < level; i++) {
+					if (q.peek().getLeft() != null)
+						q.offer(q.peek().getLeft());
+					if (q.peek().getRight() != null)
+						q.offer(q.peek().getRight());
+					System.out.print(q.poll().getData() + ", ");
+				}
+				System.out.println();
 			}
 		}
 	}
