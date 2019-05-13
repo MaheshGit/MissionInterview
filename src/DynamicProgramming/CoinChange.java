@@ -15,7 +15,6 @@ public class CoinChange {
 		int amount = 11;
 		System.out.println(coinChange(coins,amount));
 		System.out.println(coinChangeTopDown(coins,amount));
-		System.out.println(coinChangeGreedy(coins,amount));
 		
 	}
 	
@@ -115,21 +114,6 @@ public class CoinChange {
 	    return dp[remainder];
 	  }
 	
-    public static int coinChangeGreedy(int[] coins, int amount) {
-        int len = coins.length;
-        int min = 0;
-        while(amount > 0){
-        	
-            for(int i = len-1; i >= 0; i--){
-                if(amount >= coins[i]){
-                    min += amount / coins[i];
-                    amount = amount % coins[i];
-                }
-            }
-        }
-      
-      return min;
-  }
 
 
 }
